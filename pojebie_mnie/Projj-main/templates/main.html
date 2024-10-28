@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Voting System</h1>
+    {% if username %}
+        <p>Logged in as: {{ username }}</p>
+        <a href="/logout">Logout</a>
+        {% if is_admin() %}
+            <a href="/create_survey">Create Survey</a>
+        {% endif %}
+
+        <h2>Surveys</h2>
+        <ul>
+            {% for survey_id, survey in surveys.items() %}
+                <li>
+                    <strong>{{ survey.title }} (Ends on: {{ survey.end_time.strftime('%Y-%m-%d %H:%M') }})</strong>
+                    <form method="POST" action="{{ url_for('vote', survey_id=survey_id) }}">
+                        <p>Select your score (1 to {{ survey.scale }}):</p>
+                        {% for i in range(1, survey.scale + 1) %}
+                            <input type="radio" id="score_{{ survey_id }}_{{ i }}" name="score" value="{{ i }}" required>
+                            <label for="score_{{ survey_id }}_{{ i }}">{{ i }}</label>
+                        {% endfor %}
+                        <br>
+                        <button type="submit">Submit Vote</button>
+                    </form>
+                </li>
+            {% else %}
+                <li>No surveys available.</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Survey Results</h2>
+        <canvas id="surveyChart"></canvas>
+
+        <script>
+            // Chart.js setup
+            const ctx = document.getElementById('surveyChart').getContext('2d');
+            let surveyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [], // Będzie uzupełniane dynamicznie nazwami ankiet
+                    datasets: [{
+                        label: 'Votes',
+                        data: [], // Liczba głosów dla każdej ankiety
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Surveys'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Votes'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Function to fetch survey data periodically
+            function fetchSurveyData() {
+                fetch('/survey_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        surveyChart.data.labels = data.labels;
+                        surveyChart.data.datasets[0].data = data.votes;
+                        surveyChart.update();
+                    });
+            }
+
+            // Fetch survey data every 5 seconds
+            setInterval(fetchSurveyData, 5000);
+            fetchSurveyData();  // Initial fetch
+        </script>
+
+        <h2>Votes You Participated In</h2>
+        <ul>
+            {% for survey_id in session.get('participated_surveys', []) %}
+                <li>{{ surveys[survey_id]['title'] }}</li>
+            {% else %}
+                <li>You have not participated in any votes yet.</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Please <a href="/login">login</a> or <a href="/register">register</a> to see surveys and results.</p>
+    {% endif %}
+</body>
+</html>
