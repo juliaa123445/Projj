@@ -1,0 +1,165 @@
+﻿/* Ustawienie eleganckiej czcionki */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px; /* Adds padding around content so it's not at the very edge */
+}
+
+.menu {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.menu-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.menu-button:hover {
+    background-color: #45a049;
+}
+
+.modal-content {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal label {
+    display: block;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.modal button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+.message-invalid {
+    color: red;
+    font-size: 12px;
+}
+
+#flash-messages {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 400px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.flash-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Center the table in the page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Styling table cells */
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Table header styling */
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Radio button styling for inline display */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Button styling */
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
