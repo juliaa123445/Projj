@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Welcome to the Voting Application!</h1>
+    <p>Express your opinion by participating in live polls. Register or login to start voting!</p>
+</div>
+
+<div class="icon-container">
+    <img src="{{ url_for('static', filename='obrazek.webp') }}" alt="Voting Icon" class="vote-icon">
+</div>
+
+
+<div class="menu">
+    <button id="register-button" class="menu-button">Register</button>
+    <button id="login-button" class="menu-button">Login</button>
+</div>
+
+<div class="how-it-works">
+    <h2>How It Works</h2>
+    <ul>
+        <li>1. Register for an account</li>
+        <li>2. Select a poll</li>
+        <li>3. Cast your vote</li>
+    </ul>
+</div>
+
+<div id="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Modal for Register -->
+<div id="register-content" class="modal-content">
+    <div class="modal">
+        <span class="close" onclick="closeModal('register-content')">&times;</span>
+        <h1>Sign up</h1>
+        <form method="POST" action="/">
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" name="username" required>
+            <div id="username-messages">
+                {% if username_valid is not none and not username_valid %}
+                    <p class="message-invalid">Invalid username</p>
+                {% endif %}
+            </div>
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="password" required>
+            <button type="submit" name="register">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for Login -->
+<div id="login-content" class="modal-content">
+    <div class="modal">
+        <span class="close" onclick="closeModal('login-content')">&times;</span>
+        <h1>Log in</h1>
+        <form method="POST" action="/">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="username" required>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="password" required>
+            <button type="submit" name="login">Login</button>
+        </form>
+    </div>
+</div>
+<footer class="footer">
+    <p>© 2024 Voting Application. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
