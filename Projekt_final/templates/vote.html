@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Głosowanie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <h1 style="text-align: center; margin-bottom: 20px;">Głosowanie</h1>
+
+    <!-- Przycisk wylogowania w lewym dolnym rogu -->
+    <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+
+    <!-- Tabela głosowania -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Czas trwania</th>
+                <th>Ilość oddanych głosów</th>
+                <th>Opis</th>
+                <th>Opcje</th>
+                <th>Głosuj</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for survey in surveys %}
+        <form method="POST">
+        <tr>
+            <td>{{ survey.title }}</td>
+            <td>{{ survey.start_time.strftime('%Y-%m-%d %H:%M') }} - {{ survey.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ survey.votes | length }}</td>
+            <td>{{ survey.description }}</td>
+            <td>
+                <input type="hidden" name="survey_id" value="{{ survey.id }}">
+                {% for i in range(1, survey.scale + 1) %}
+                    <input type="radio" id="score_{{ survey.id }}_{{ i }}" name="score" value="{{ i }}" required>
+                    <label for="score_{{ survey.id }}_{{ i }}">{{ survey.options[i - 1].position if survey.options and survey.options[i - 1] else i }}</label>
+                {% endfor %}
+            </td>
+            <td>
+                <button type="submit">Głosuj</button>
+            </td>
+        </tr>
+        </form>
+        {% else %}
+        <tr>
+            <td colspan="6">Brak dostępnych ankiet.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 style="text-align: center; margin-top: 40px;">Aktualny Stan Głosów</h2>
+    <div id="charts-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
+        {% for survey in surveys %}
+        <div style="width: 300px;">
+            <h3 style="text-align: center;">{{ survey.title }}</h3>
+            <canvas id="votesChart{{ survey.id }}" width="300" height="200"></canvas>
+        </div>
+    {% endfor %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

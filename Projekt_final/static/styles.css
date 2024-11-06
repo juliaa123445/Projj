@@ -1,0 +1,378 @@
+﻿/* Ustawienie eleganckiej czcionki */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px; /* Adds padding around content so it's not at the very edge */
+}
+
+.menu {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.menu-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.menu-button:hover {
+    background-color: #45a049;
+}
+
+.modal-content {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal label {
+    display: block;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.modal button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+.message-invalid {
+    color: red;
+    font-size: 12px;
+}
+
+#flash-messages {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 400px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.flash-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Center the table in the page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Styling table cells */
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Table header styling */
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Radio button styling for inline display */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Button styling */
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Header styling */
+.header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Voting icon styling */
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.vote-icon {
+    width: 100px;
+    height: auto;
+}
+
+/* How It Works section styling */
+.how-it-works {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.how-it-works h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+.how-it-works ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.how-it-works li {
+    font-size: 1.2em;
+    color: #444;
+    margin: 10px 0;
+}
+
+/* Menu button styling */
+.menu-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #28a745;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: #218838;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.vote-icon {
+    width: 100px;
+    height: auto;
+}
+
+.how-it-works {
+    text-align: center;
+    margin: 30px auto;
+    background-color: #d4edda;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.how-it-works h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+.how-it-works ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.how-it-works li {
+    font-size: 1.2em;
+    color: #444;
+    margin: 10px 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #555;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: #28a745;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.logout-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    padding: 12px 24px;
+    background-color: #45a049;
+}
+
+/* Survey form container with green background and padding */
+.survey-form-container {
+    width: 50%; /* dostosuj szerokość według potrzeb */
+    background-color: #d4edda;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+    display: inline-block; /* użyj inline-block zamiast float */
+    vertical-align: top; /* wyrównanie do góry */
+    margin-left: 20px; /* dostosuj margines */
+    margin-bottom: 20px;
+}
+
+
+.bold-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.existing-surveys-container {
+    width: 75%;
+    background-color: #f8d7da;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e74c3c;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styl dla przycisku akcji, np. Download Report */
+.action-button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    background-color: #45a049;
+}
+
+/* Styl dla przycisku DELETE w dużych, zielonych literach */
+.delete-button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.delete-button:hover {
+    background-color: #45a049;
+}
+
+/* Styl dla czerwonego „X” jako ikony usuwania */
+.delete-icon {
+    color: #e74c3c;
+    font-size: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: #c0392b;
+}

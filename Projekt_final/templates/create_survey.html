@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Survey</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Flash Messages -->
+    <div id="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Survey Creation Form -->
+    <div class="survey-form-container">
+        <h2>Create a New Survey</h2>
+        <form method="POST">
+            <label for="title" class="bold-label">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="description" class="bold-label">Description:</label>
+            <textarea id="description" name="description" required></textarea><br><br>
+
+            <label for="start_time" class="bold-label">Start Time:</label>
+            <input type="datetime-local" id="start_time" name="start_time" required><br><br>
+
+            <label for="end_time" class="bold-label">End Time:</label>
+            <input type="datetime-local" id="end_time" name="end_time" required><br><br>
+
+            <label for="scale" class="bold-label">Number of Options:</label>
+            <select id="scale" name="scale" required>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+            </select><br><br>
+
+            <button type="submit">Create Survey</button>
+        </form>
+    </div>
+
+    <div class="existing-surveys-container">
+    <h2>Existing Surveys</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Actions</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for survey in surveys %}
+            <tr>
+                <td>{{ survey.title }}</td>
+                <td>{{ survey.description }}</td>
+                <td>{{ survey.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ survey.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <a href="{{ url_for('report', survey_id=survey.id) }}" class="download-report">Download Report</a>
+                </td>
+                <td>
+                    <a href="{{ url_for('delete_survey', survey_id=survey.id) }}" class="delete-icon" onclick="return confirm('Are you sure you want to delete this survey?');">✖</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">No surveys available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    <p><a class="link" href="/">Back to Main Page</a></p>
+    <div>
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
